@@ -41,12 +41,7 @@
             overflow-x: hidden;
         }
 
-        /* SVG filter for transparent background */
-        .transparent-bg {
-            filter: url(#remove-white);
-        }
-
-        /* Realistic paper texture background */
+        /* Paper texture background */
         body::before {
             content: '';
             position: fixed;
@@ -180,6 +175,7 @@
             width: auto;
             display: block;
             transition: transform 0.4s ease;
+            mix-blend-mode: multiply;
         }
 
         .logo-img:hover {
@@ -231,23 +227,31 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
             position: relative;
-            padding: 8rem 2rem 4rem;
+            padding: 8rem 4rem 4rem;
             z-index: 2;
         }
 
         .hero-content {
-            text-align: center;
-            position: relative;
-            z-index: 3;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            text-align: left;
         }
 
         .hero-logo {
-            height: 220px;
+            height: 200px;
             width: auto;
             display: block;
-            margin: 0 auto 2rem;
+            margin-bottom: 2rem;
+            mix-blend-mode: multiply;
             animation: fadeInLogo 1.5s ease;
         }
 
@@ -264,29 +268,31 @@
 
         .hero h1 {
             font-family: var(--font-body);
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 300;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.15em;
             margin-bottom: 1.5rem;
             color: var(--ink);
             line-height: 1.1;
+            text-align: left;
         }
 
         .hero-line {
-            width: 1px;
-            height: 80px;
+            width: 80px;
+            height: 1px;
             background: var(--ink);
-            margin: 0 auto 2rem;
-            opacity: 0.3;
+            margin-bottom: 2rem;
+            opacity: 0.4;
         }
 
         .hero-subtitle {
             font-family: var(--font-body);
             font-size: 1.3rem;
             font-weight: 300;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.2em;
             color: var(--ink-light);
             font-style: italic;
+            text-align: left;
         }
 
         .hero-subtitle span {
@@ -303,6 +309,44 @@
             opacity: 0.6;
         }
 
+        /* Hero painting with frame */
+        .hero-painting-wrap {
+            position: relative;
+            justify-self: end;
+        }
+
+        .hero-painting-wrap::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 1px solid var(--ink);
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .hero-painting {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 10px 40px rgba(26, 26, 26, 0.15);
+        }
+
+        .hero-painting img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            display: block;
+            filter: sepia(10%) contrast(0.98);
+            transition: filter 0.6s ease;
+        }
+
+        .hero-painting:hover img {
+            filter: sepia(0%) contrast(1);
+        }
+
         /* Sections */
         section {
             padding: 8rem 4rem;
@@ -312,43 +356,37 @@
             z-index: 2;
         }
 
+        /* Left-aligned section headers */
         .section-header {
-            text-align: center;
+            text-align: left;
             margin-bottom: 5rem;
             position: relative;
+            padding-left: 0;
         }
 
         .section-title {
             font-family: var(--font-body);
             font-size: 2.5rem;
             font-weight: 300;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.2em;
             color: var(--ink);
             position: relative;
             display: inline-block;
-            padding: 0 2rem;
+            text-align: left;
         }
 
-        .section-title::before,
         .section-title::after {
             content: '';
             position: absolute;
             top: 50%;
-            width: 60px;
+            left: calc(100% + 20px);
+            width: 80px;
             height: 1px;
             background: var(--ink);
-            opacity: 0.25;
+            opacity: 0.3;
         }
 
-        .section-title::before {
-            left: -60px;
-        }
-
-        .section-title::after {
-            right: -60px;
-        }
-
-        /* Gallery */
+        /* Gallery - вернул как было */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -470,6 +508,7 @@
             margin-bottom: 1rem;
             letter-spacing: 0.15em;
             color: var(--ink);
+            text-align: left;
         }
 
         .about-text p {
@@ -478,6 +517,7 @@
             color: var(--ink-light);
             margin-bottom: 1.5rem;
             font-weight: 300;
+            text-align: left;
         }
 
         .about-quote {
@@ -490,6 +530,7 @@
             margin: 3rem 0;
             line-height: 1.8;
             position: relative;
+            text-align: left;
         }
 
         .about-signature {
@@ -501,6 +542,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            text-align: left;
         }
 
         .about-signature::after {
@@ -514,32 +556,11 @@
 
         /* Order */
         .order-section {
-            text-align: center;
+            text-align: left;
             padding: 6rem 4rem;
             position: relative;
             border-top: 1px solid rgba(26, 26, 26, 0.08);
             border-bottom: 1px solid rgba(26, 26, 26, 0.08);
-        }
-
-        .order-section::before,
-        .order-section::after {
-            content: '✿';
-            position: absolute;
-            color: var(--sakura);
-            opacity: 0.3;
-            font-size: 1.2rem;
-        }
-
-        .order-section::before {
-            top: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .order-section::after {
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
         }
 
         .order-section h2 {
@@ -547,7 +568,8 @@
             font-size: 2.5rem;
             font-weight: 300;
             margin-bottom: 1.5rem;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.2em;
+            text-align: left;
         }
 
         .order-section p {
@@ -555,9 +577,8 @@
             color: var(--ink-light);
             margin-bottom: 3rem;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
             line-height: 1.9;
+            text-align: left;
         }
 
         .cta-button {
@@ -622,15 +643,15 @@
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
-            text-align: center;
         }
 
         .footer-logo-img {
-            height: 100px;
+            height: 90px;
             width: auto;
             display: block;
-            margin: 0 auto 3rem;
+            margin-bottom: 3rem;
             transition: transform 0.4s ease;
+            filter: brightness(0) invert(1);
         }
 
         .footer-logo-img:hover {
@@ -639,7 +660,6 @@
 
         .social-links {
             display: flex;
-            justify-content: center;
             gap: 3rem;
             margin-bottom: 3rem;
             flex-wrap: wrap;
@@ -676,7 +696,6 @@
         }
 
         .footer-email {
-            text-align: center;
             margin-bottom: 3rem;
         }
 
@@ -703,7 +722,6 @@
         }
 
         .copyright {
-            text-align: center;
             font-size: 0.85rem;
             color: rgba(240, 230, 211, 0.4);
             letter-spacing: 0.15em;
@@ -741,8 +759,22 @@
                 gap: 1.5rem;
             }
 
+            .hero {
+                padding: 6rem 2rem 3rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-painting-wrap {
+                justify-self: center;
+                max-width: 400px;
+            }
+
             .hero-logo {
-                height: 160px;
+                height: 140px;
             }
 
             .hero h1 {
@@ -774,32 +806,17 @@
                 font-size: 1.8rem;
             }
 
-            .section-title::before,
             .section-title::after {
                 display: none;
             }
 
             .footer-logo-img {
-                height: 80px;
+                height: 70px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- SVG Filter for transparent background -->
-    <svg style="position: absolute; width: 0; height: 0;">
-        <defs>
-            <filter id="remove-white">
-                <feColorMatrix type="matrix" values="
-                    1 0 0 0 0
-                    0 1 0 0 0
-                    0 0 1 0 0
-                    0 0 0 18 -7
-                "/>
-            </filter>
-        </defs>
-    </svg>
-
     <!-- Paper texture layers -->
     <div class="paper-overlay"></div>
     <div class="paper-texture-deep"></div>
@@ -815,7 +832,7 @@
     <header id="header">
         <nav>
             <div class="logo-wrap">
-                <img src="logo-tb.png" alt="Татьяна Бедина" class="logo-img transparent-bg">
+                <img src="logo-tb.png" alt="Татьяна Бедина" class="logo-img">
             </div>
             <ul class="nav-links">
                 <li><a href="#gallery">Галерея</a></li>
@@ -828,14 +845,21 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <img src="logo-tb.png" alt="Татьяна Бедина" class="hero-logo transparent-bg">
-            <h1>Татьяна Бедина</h1>
-            <div class="hero-line"></div>
-            <p class="hero-subtitle">
-                <span>Акварель</span>
-                <span>Масло</span>
-                <span>Смешанная техника</span>
-            </p>
+            <div class="hero-text">
+                <img src="logo-tb.png" alt="Татьяна Бедина" class="hero-logo">
+                <h1>Татьяна Бедина</h1>
+                <div class="hero-line"></div>
+                <p class="hero-subtitle">
+                    <span>Акварель</span>
+                    <span>Масло</span>
+                    <span>Смешанная техника</span>
+                </p>
+            </div>
+            <div class="hero-painting-wrap fade-in">
+                <div class="hero-painting">
+                    <img src="apples.jpg" alt="Натюрморт с яблоками">
+                </div>
+            </div>
         </div>
     </section>
 
@@ -957,7 +981,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <img src="logo-tb.png" alt="Татьяна Бедина" class="footer-logo-img transparent-bg">
+            <img src="logo-tb.png" alt="Татьяна Бедина" class="footer-logo-img">
             <div class="social-links">
                 <a href="#" target="_blank">Instagram</a>
                 <a href="#" target="_blank">Telegram</a>
