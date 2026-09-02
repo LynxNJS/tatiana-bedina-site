@@ -596,7 +596,6 @@
         .interior-item:nth-child(2) { grid-column: span 6; }
         .interior-item:nth-child(3) { grid-column: span 6; }
         .interior-item:nth-child(4) { grid-column: span 6; }
-        .interior-item:nth-child(5) { grid-column: span 12; }
 
         .interior-item img {
             width: 100%;
@@ -772,59 +771,59 @@
         .footer-logo-img {
             height: 90px; width: auto;
             display: block;
-            margin-bottom: 3rem;
+            margin: 0 auto 3rem;
             transition: transform 0.4s ease;
             filter: brightness(0) invert(1);
         }
         .footer-logo-img:hover { transform: scale(1.05); }
 
-        .social-links {
+        .footer-contacts {
             display: flex;
-            gap: 3rem;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
             margin-bottom: 3rem;
             flex-wrap: wrap;
         }
-        .social-links a {
-            color: var(--washi);
+
+        .footer-contact-link {
+            color: var(--sakura);
             text-decoration: none;
             font-family: var(--font-body);
-            font-size: 0.95rem;
-            letter-spacing: 0.15em;
+            font-size: 1.1rem;
+            letter-spacing: 0.08em;
             transition: color 0.3s ease;
             position: relative;
-            padding-bottom: 0.3rem;
+            padding-bottom: 0.2rem;
         }
-        .social-links a::after {
+
+        .footer-contact-link::after {
             content: '';
             position: absolute;
-            bottom: 0; left: 0;
-            width: 0; height: 1px;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
             background: var(--sakura);
             transition: width 0.3s ease;
         }
-        .social-links a:hover { color: var(--sakura); }
-        .social-links a:hover::after { width: 100%; }
 
-        .footer-email { margin-bottom: 3rem; }
-        .footer-email-label {
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            color: rgba(240, 230, 211, 0.5);
-            letter-spacing: 0.25em;
-            margin-bottom: 1rem;
-            display: block;
+        .footer-contact-link:hover {
+            color: var(--washi);
         }
-        .footer-email a {
-            font-family: var(--font-body);
-            font-size: 1.3rem;
-            color: var(--sakura);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            letter-spacing: 0.05em;
+
+        .footer-contact-link:hover::after {
+            width: 100%;
         }
-        .footer-email a:hover { color: var(--washi); }
+
+        .footer-contact-separator {
+            color: var(--sakura-deep);
+            opacity: 0.6;
+            font-size: 1.2rem;
+        }
 
         .copyright {
+            text-align: center;
             font-size: 0.85rem;
             color: rgba(240, 230, 211, 0.4);
             letter-spacing: 0.15em;
@@ -1096,10 +1095,10 @@
                     </div>
                     <div class="flowers-item fade-in">
                         <div class="painting-frame">
-                            <img src="flowers-pink.jpg" alt="Ваза с пионами">
+                            <img src="flowers-pink.jpg" alt="Цветы">
                         </div>
                         <div class="painting-info">
-                            <h3>Ваза с пионами</h3>
+                            <h3>Цветы</h3>
                             <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
                         </div>
                     </div>
@@ -1290,7 +1289,7 @@
                 <h3>Искусство как путь</h3>
                 <p>Меня зовут Татьяна, и я создаю произведения, которые говорят на языке эмоций и форм. Моя работа — это исследование пространства, цвета и движения, поиск гармонии между хаосом и порядком.</p>
                 <div class="about-quote">Каждая картина — это история, рассказанная через плавные линии и мягкие переходы цвета</div>
-                <p>Вдохновляюсь природой, архитектурой и внутренним миром человека. Мои картины хранятся в частных собраниях в разных странах мира. Я верю, что искусство способно трансформировать пространство и наполнять его смыслом.</p>
+                <p>Вдохновляюсь природой, архитектурой и внутренним миром человека. Мои картины хранятся в частных собраниях по всей стране. Я верю, что искусство способно трансформировать пространство и наполнять его смыслом.</p>
                 <div class="about-signature">Татьяна Бедина</div>
             </div>
         </div>
@@ -1307,15 +1306,10 @@
     <footer>
         <div class="footer-content">
             <img src="logo-tb.png" alt="Татьяна Бедина" class="footer-logo-img">
-            <div class="social-links">
-                <a href="#" target="_blank">Instagram</a>
-                <a href="#" target="_blank">Telegram</a>
-                <a href="#" target="_blank">Pinterest</a>
-                <a href="#" target="_blank">Behance</a>
-            </div>
-            <div class="footer-email">
-                <span class="footer-email-label">Напишите мне</span>
-                <a href="mailto:bedinatv@mail.ru">bedinatv@mail.ru</a>
+            <div class="footer-contacts">
+                <a href="https://t.me/bedinatv" target="_blank" class="footer-contact-link">Telegram: @bedinatv</a>
+                <span class="footer-contact-separator">·</span>
+                <a href="mailto:bedinatv@mail.ru" class="footer-contact-link">bedinatv@mail.ru</a>
             </div>
             <div class="copyright">© 2026 Татьяна Бедина · Все права защищены</div>
         </div>
