@@ -6,7 +6,7 @@
     <title>Татьяна Бедина — Художник</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Noto+Serif:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -176,9 +176,10 @@
         .hero {
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            justify-content: center;
             position: relative;
-            padding: 8rem 4rem 4rem;
+            padding: 7.5rem 4rem 3rem;
             z-index: 2;
         }
 
@@ -189,15 +190,15 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: center;
+            align-items: start;
         }
 
         .hero-text { text-align: left; }
 
         .hero-logo {
-            height: 170px; width: auto;
+            height: 150px; width: auto;
             display: block;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             mix-blend-mode: multiply;
             animation: fadeInLogo 1.5s ease;
         }
@@ -209,10 +210,10 @@
 
         .hero h1 {
             font-family: var(--font-body);
-            font-size: 3.6rem;
+            font-size: 3.4rem;
             font-weight: 300;
             letter-spacing: 0.15em;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             color: var(--ink);
             line-height: 1.1;
             text-align: left;
@@ -221,8 +222,25 @@
         .hero-line {
             width: 80px; height: 1px;
             background: var(--ink);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             opacity: 0.4;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-body);
+            font-size: 1.7rem;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 0.03em;
+            color: var(--hanko);
+            margin-bottom: 1.5rem;
+            text-align: left;
+            animation: fadeInTagline 2s ease 0.5s both;
+        }
+
+        @keyframes fadeInTagline {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .hero-subtitle {
@@ -249,10 +267,75 @@
             opacity: 0.6;
         }
 
-        .hero-painting-wrap {
-            position: relative;
+        .hero-scroll-cta {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1.2rem;
+            animation: fadeInScroll 2s ease 1s both;
+        }
+
+        @keyframes fadeInScroll {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-scroll-text {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: var(--ink);
+            text-transform: uppercase;
+        }
+
+        .hero-scroll-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            border: 1px solid var(--ink);
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: var(--ink);
+            animation: bounceDown 2.5s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .hero-scroll-btn:hover {
+            background: var(--ink);
+            color: var(--washi);
+            animation: none;
+        }
+
+        .hero-scroll-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-self: end;
         }
+
+        .hero-painting-wrap { position: relative; }
 
         .hero-painting-wrap::before {
             content: '';
@@ -274,7 +357,7 @@
 
         .hero-painting img {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             height: auto;
             display: block;
             filter: sepia(10%) contrast(0.98);
@@ -318,7 +401,6 @@
             opacity: 0.3;
         }
 
-        /* Gallery Navigation */
         .gallery-nav {
             display: flex;
             flex-wrap: wrap;
@@ -345,10 +427,7 @@
             color: var(--washi);
         }
 
-        /* Gallery Sections */
-        .gallery-section {
-            display: none;
-        }
+        .gallery-section { display: none; }
 
         .gallery-section.active {
             display: block;
@@ -360,33 +439,60 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Painting frame with red border */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .gallery-card {
+            background: transparent;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-card:hover { transform: translateY(-5px); }
+
         .painting-frame {
             border: 1px solid var(--hanko);
             background: transparent;
             overflow: hidden;
+            cursor: pointer;
+            position: relative;
         }
 
         .painting-frame img {
             width: 100%;
-            height: 100%;
+            height: 500px;
             object-fit: cover;
             display: block;
+            transition: transform 0.6s ease;
         }
 
-        /* Static description under each painting */
+        .painting-frame:hover img { transform: scale(1.03); }
+
         .painting-info {
-            padding: 0.8rem 0.5rem;
-            text-align: center;
+            padding: 1.1rem 0.1rem 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.2rem;
+            text-align: left;
+        }
+
+        .painting-info-text {
+            flex: 1;
+            min-width: 0;
+            text-align: left;
         }
 
         .painting-info h3 {
             font-family: var(--font-body);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 400;
             letter-spacing: 0.1em;
             margin-bottom: 0.3rem;
             color: var(--ink);
+            text-align: left;
         }
 
         .painting-info p {
@@ -395,9 +501,173 @@
             color: var(--ink-light);
             font-style: italic;
             line-height: 1.5;
+            margin-bottom: 0;
+            text-align: left;
         }
 
-        /* Unified gallery section styling */
+        .order-btn {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: var(--ink);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            border: 1px solid var(--ink);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            align-self: center;
+        }
+
+        .order-btn:hover {
+            background: var(--ink);
+            color: var(--washi);
+        }
+
+        /* ===== Lightbox with zoom & multi-image ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            overflow: hidden;
+        }
+
+        .lightbox.active { display: block; }
+
+        .lightbox-stage {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3.5rem 2rem 5.5rem;
+        }
+
+        .lightbox-stage img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border: 2px solid var(--washi);
+            transform: translate(0, 0) scale(1);
+            transition: transform 0.25s ease;
+            cursor: zoom-in;
+            user-select: none;
+            -webkit-user-drag: none;
+            will-change: transform;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            width: 48px; height: 48px;
+            background: transparent;
+            border: 1px solid var(--washi);
+            border-radius: 50%;
+            color: var(--washi);
+            font-size: 1.6rem;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 2002;
+            transition: all 0.3s ease;
+        }
+        .lightbox-close:hover { background: var(--washi); color: var(--ink); }
+
+        /* Стрелки листания (видны только для диплома) */
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            border: 1px solid var(--washi);
+            background: rgba(240, 230, 211, 0.08);
+            color: var(--washi);
+            font-size: 1.6rem;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 2002;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .lightbox.has-nav .lightbox-arrow { display: flex; }
+        .lightbox-arrow:hover { background: var(--washi); color: var(--ink); }
+        .lightbox-arrow-prev { left: 1.5rem; }
+        .lightbox-arrow-next { right: 1.5rem; }
+
+        .lightbox-counter {
+            position: absolute;
+            top: 1.6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(240, 230, 211, 0.6);
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            display: none;
+            z-index: 2001;
+        }
+        .lightbox.has-nav .lightbox-counter { display: block; }
+        .lightbox.has-nav .lightbox-hint { display: none; }
+
+        .lightbox-controls {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: rgba(240, 230, 211, 0.12);
+            border: 1px solid rgba(240, 230, 211, 0.35);
+            backdrop-filter: blur(8px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            z-index: 2002;
+        }
+
+        .lightbox-controls button {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--washi);
+            background: transparent;
+            color: var(--washi);
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-controls button:hover { background: var(--washi); color: var(--ink); }
+
+        #zoom-label {
+            color: var(--washi);
+            min-width: 54px;
+            text-align: center;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+        }
+
+        .lightbox-hint {
+            position: absolute;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(240, 230, 211, 0.5);
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            font-style: italic;
+            z-index: 2001;
+            pointer-events: none;
+        }
+
         .gallery-subsection {
             padding: 2rem 0;
             position: relative;
@@ -406,9 +676,7 @@
         .gallery-subsection::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 1px;
             background: rgba(26, 26, 26, 0.1);
         }
@@ -416,197 +684,11 @@
         .gallery-subsection::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             height: 1px;
             background: rgba(26, 26, 26, 0.1);
         }
 
-        /* Pop Art Section */
-        .popart-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 2.5rem;
-        }
-
-        .popart-item {
-            cursor: pointer;
-            transition: transform 0.5s ease;
-        }
-        .popart-item:nth-child(1) { grid-column: span 7; }
-        .popart-item:nth-child(2) { grid-column: span 5; }
-        .popart-item:nth-child(3) { grid-column: span 5; }
-        .popart-item:nth-child(4) { grid-column: span 7; }
-        .popart-item:nth-child(5) { grid-column: span 6; }
-        .popart-item:nth-child(6) { grid-column: span 6; }
-
-        .popart-item img {
-            width: 100%;
-            min-height: 450px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.8s ease;
-        }
-        .popart-item:hover { transform: scale(1.02); }
-        .popart-item:hover img { transform: scale(1.05); }
-
-        /* Landscape Section */
-        .landscape-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-        }
-
-        .landscape-item {
-            cursor: pointer;
-            transition: transform 0.6s ease;
-        }
-        .landscape-item img {
-            width: 100%;
-            height: 600px;
-            object-fit: cover;
-            display: block;
-            transition: transform 1s ease;
-        }
-        .landscape-item:hover img { transform: scale(1.04); }
-
-        /* Russian Style Section */
-        .russian-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-        }
-
-        .russian-item {
-            cursor: pointer;
-            transition: transform 0.6s ease;
-        }
-
-        .russian-item img {
-            width: 100%;
-            height: 550px;
-            object-fit: cover;
-            display: block;
-            transition: transform 1s ease;
-        }
-
-        .russian-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .russian-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Flowers Section */
-        .flowers-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 2.5rem;
-        }
-
-        .flowers-item {
-            cursor: pointer;
-            transition: transform 0.6s ease;
-        }
-
-        .flowers-item:nth-child(1) { grid-column: span 7; }
-        .flowers-item:nth-child(2) { grid-column: span 5; }
-        .flowers-item:nth-child(3) { grid-column: span 5; }
-        .flowers-item:nth-child(4) { grid-column: span 7; }
-        .flowers-item:nth-child(5) { grid-column: span 6; }
-        .flowers-item:nth-child(6) { grid-column: span 6; }
-
-        .flowers-item img {
-            width: 100%;
-            min-height: 480px;
-            object-fit: cover;
-            display: block;
-            transition: transform 1s ease;
-        }
-
-        .flowers-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .flowers-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Still Life Section */
-        .still-life-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-        }
-
-        .still-life-item {
-            cursor: pointer;
-            transition: transform 0.6s ease;
-        }
-        .still-life-item img {
-            width: 100%;
-            height: 600px;
-            object-fit: cover;
-            display: block;
-            transition: transform 1s ease;
-        }
-        .still-life-item:hover img { transform: scale(1.04); }
-
-        /* Graphics Section */
-        .graphics-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 3rem;
-        }
-
-        .graphics-item {
-            cursor: pointer;
-            transition: transform 0.6s ease;
-        }
-        .graphics-item:nth-child(1) { grid-column: span 6; }
-        .graphics-item:nth-child(2) { grid-column: span 6; }
-        .graphics-item:nth-child(3) { grid-column: span 4; }
-        .graphics-item:nth-child(4) { grid-column: span 4; }
-        .graphics-item:nth-child(5) { grid-column: span 4; }
-
-        .graphics-item img {
-            width: 100%;
-            min-height: 500px;
-            object-fit: cover;
-            display: block;
-            filter: grayscale(100%) contrast(1.05);
-            transition: all 1s ease;
-        }
-        .graphics-item:hover img { transform: scale(1.03); filter: grayscale(100%) contrast(1.15); }
-
-        /* Interior Section */
-        .interior-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 3rem;
-        }
-
-        .interior-item {
-            cursor: pointer;
-            transition: transform 0.6s ease;
-        }
-        .interior-item:nth-child(1) { grid-column: span 6; }
-        .interior-item:nth-child(2) { grid-column: span 6; }
-        .interior-item:nth-child(3) { grid-column: span 6; }
-        .interior-item:nth-child(4) { grid-column: span 6; }
-
-        .interior-item img {
-            width: 100%;
-            min-height: 550px;
-            object-fit: cover;
-            display: block;
-            transition: transform 1s ease;
-        }
-        .interior-item:hover img { transform: scale(1.04); }
-
-        /* About */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -658,6 +740,19 @@
             text-align: left;
         }
 
+        /* Ссылка на диплом */
+        .diploma-link {
+            color: var(--hanko);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(196, 30, 58, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .diploma-link:hover {
+            color: var(--sakura-deep);
+            border-bottom-color: var(--sakura-deep);
+        }
+
         .about-quote {
             font-family: var(--font-body);
             font-style: italic;
@@ -691,7 +786,6 @@
             max-width: 100px;
         }
 
-        /* Order */
         .order-section {
             text-align: left;
             padding: 6rem 4rem;
@@ -699,6 +793,7 @@
             border-top: 1px solid rgba(26, 26, 26, 0.08);
             border-bottom: 1px solid rgba(26, 26, 26, 0.08);
         }
+
         .order-section h2 {
             font-family: var(--font-body);
             font-size: 2.5rem;
@@ -707,13 +802,71 @@
             letter-spacing: 0.2em;
             text-align: left;
         }
-        .order-section p {
+
+        .order-intro {
             font-size: 1.15rem;
             color: var(--ink-light);
-            margin-bottom: 3rem;
-            max-width: 600px;
+            margin-bottom: 3.5rem;
+            max-width: 700px;
             line-height: 1.9;
-            text-align: left;
+            font-style: italic;
+        }
+
+        .order-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .order-option {
+            border: 1px solid rgba(26, 26, 26, 0.15);
+            padding: 2.8rem 2.2rem 2.4rem;
+            position: relative;
+            transition: all 0.4s ease;
+            background: rgba(250, 248, 240, 0.45);
+        }
+
+        .order-option::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 46px; height: 2px;
+            background: var(--hanko);
+            transition: width 0.5s ease;
+        }
+
+        .order-option:hover {
+            border-color: var(--hanko);
+            transform: translateY(-8px);
+            box-shadow: 0 18px 45px rgba(26, 26, 26, 0.12);
+        }
+
+        .order-option:hover::before { width: calc(100% + 2px); }
+
+        .order-option-num {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            letter-spacing: 0.4em;
+            color: var(--hanko);
+            margin-bottom: 1.3rem;
+        }
+
+        .order-option h3 {
+            font-family: var(--font-body);
+            font-size: 1.7rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .order-option p {
+            font-size: 1.02rem;
+            color: var(--ink-light);
+            font-style: italic;
+            line-height: 1.75;
         }
 
         .cta-button {
@@ -742,7 +895,6 @@
         .cta-button:hover::before { left: 0; }
         .cta-button:hover { color: var(--washi); }
 
-        /* Footer */
         footer {
             background: var(--ink);
             color: var(--washi);
@@ -787,48 +939,40 @@
         }
 
         .footer-contact-link {
-            color: var(--sakura);
+            color: var(--washi);
             text-decoration: none;
             font-family: var(--font-body);
-            font-size: 1.1rem;
-            letter-spacing: 0.08em;
+            font-size: 1.05rem;
+            letter-spacing: 0.12em;
             transition: color 0.3s ease;
             position: relative;
-            padding-bottom: 0.2rem;
+            padding-bottom: 0.3rem;
         }
 
         .footer-contact-link::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
+            bottom: 0; left: 0;
+            width: 0; height: 1px;
             background: var(--sakura);
             transition: width 0.3s ease;
         }
 
-        .footer-contact-link:hover {
-            color: var(--washi);
-        }
+        .footer-contact-link:hover { color: var(--sakura); }
+        .footer-contact-link:hover::after { width: 100%; }
 
-        .footer-contact-link:hover::after {
-            width: 100%;
-        }
-
-        .footer-contact-separator {
+        .footer-contact-divider {
             color: var(--sakura-deep);
-            opacity: 0.6;
             font-size: 1.2rem;
         }
 
         .copyright {
-            text-align: center;
             font-size: 0.85rem;
             color: rgba(240, 230, 211, 0.4);
             letter-spacing: 0.15em;
             padding-top: 2rem;
             border-top: 1px solid rgba(240, 230, 211, 0.1);
+            text-align: center;
         }
 
         .fade-in {
@@ -845,20 +989,31 @@
             .nav-links { gap: 0.5rem; }
             .nav-links a { font-size: 0.82rem; letter-spacing: 0.04em; }
             .hero { padding: 6rem 1.5rem 3rem; }
-            .hero-content { grid-template-columns: 1fr; gap: 3rem; }
-            .hero-painting-wrap { justify-self: center; max-width: 400px; }
-            .hero-logo { height: 120px; }
+            .hero-content { grid-template-columns: 1fr; gap: 2.5rem; }
+            .hero-right { justify-self: center; }
+            .hero-painting-wrap { max-width: 400px; }
+            .hero-logo { height: 110px; }
             .hero h1 { font-size: 2.2rem; }
+            .hero-tagline { font-size: 1.3rem; }
             section { padding: 4rem 1.5rem; }
-            .popart-grid, .flowers-grid, .graphics-grid, .interior-grid { grid-template-columns: 1fr; }
-            .landscape-grid, .still-life-grid, .russian-grid { grid-template-columns: 1fr; }
-            .popart-item:nth-child(n), .flowers-item:nth-child(n), .graphics-item:nth-child(n), .interior-item:nth-child(n) { grid-column: span 1; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .order-options { grid-template-columns: 1fr; gap: 1.5rem; }
             .about-content { grid-template-columns: 1fr; gap: 3rem; }
             .about-image img { height: 500px; }
             .section-title { font-size: 1.7rem; }
             .section-title::after { display: none; }
             .footer-logo-img { height: 70px; }
             .gallery-nav-btn { font-size: 0.85rem; padding: 0.6rem 1.2rem; }
+            .hero-scroll-btn { width: 46px; height: 46px; }
+            .hero-scroll-text { font-size: 0.95rem; }
+            .painting-frame img { height: 400px; }
+            .lightbox-hint { display: none; }
+            .painting-info { flex-wrap: wrap; }
+            .footer-contacts { flex-direction: column; gap: 0.8rem; }
+            .footer-contact-divider { display: none; }
+            .lightbox-arrow { width: 42px; height: 42px; font-size: 1.3rem; }
+            .lightbox-arrow-prev { left: 0.8rem; }
+            .lightbox-arrow-next { right: 0.8rem; }
         }
     </style>
 </head>
@@ -891,16 +1046,27 @@
                 <img src="logo-tb.png" alt="Татьяна Бедина" class="hero-logo">
                 <h1>Татьяна Бедина</h1>
                 <div class="hero-line"></div>
+                <p class="hero-tagline">Современная живопись для дома и интерьера</p>
                 <p class="hero-subtitle">
                     <span>Акварель</span>
                     <span>Масло</span>
                     <span>Акрил</span>
                     <span>Поталь</span>
                 </p>
+                <div class="hero-scroll-cta">
+                    <span class="hero-scroll-text">Посмотреть работы</span>
+                    <a href="#gallery" class="hero-scroll-btn" aria-label="Прокрутить к галерее">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                </div>
             </div>
-            <div class="hero-painting-wrap fade-in">
-                <div class="hero-painting">
-                    <img src="apples-red.jpg" alt="Натюрморт с яблоками">
+            <div class="hero-right">
+                <div class="hero-painting-wrap fade-in">
+                    <div class="hero-painting">
+                        <img src="apples.jpg" alt="Натюрморт с яблоками">
+                    </div>
                 </div>
             </div>
         </div>
@@ -918,65 +1084,71 @@
             <button class="gallery-nav-btn" data-section="flowers">Цветы</button>
             <button class="gallery-nav-btn" data-section="still-life">Натюрморт</button>
             <button class="gallery-nav-btn" data-section="graphics">Графика</button>
-            <button class="gallery-nav-btn" data-section="interior">Интерьерные</button>
+            <button class="gallery-nav-btn" data-section="interior">Для интерьера</button>
         </div>
 
         <!-- Поп-арт -->
         <div id="popart" class="gallery-section active">
             <div class="gallery-subsection">
-                <div class="popart-grid">
-                    <div class="popart-item fade-in">
-                        <div class="painting-frame">
+                <div class="gallery-grid">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('popart-sphinx.jpg')">
                             <img src="popart-sphinx.jpg" alt="Сфинкс">
                         </div>
                         <div class="painting-info">
-                            <h3>Сфинкс</h3>
-                            <p>Холст 21×30, акрил, 2025 г.</p>
+                            <div class="painting-info-text">
+                                <h3>Сфинкс</h3>
+                                <p>Холст 21×30, акрил, 2025 г.</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="popart-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('popart-dali.jpg')">
                             <img src="popart-dali.jpg" alt="Сальвадор Дали">
                         </div>
                         <div class="painting-info">
-                            <h3>Сальвадор Дали</h3>
-                            <p>Холст 21×30, акрил, 2026 г.<br>Выставочный зал КнААЗ</p>
+                            <div class="painting-info-text">
+                                <h3>Сальвадор Дали</h3>
+                                <p>Холст 21×30, акрил, 2026 г.<br>Выставочный зал КнААЗ</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="popart-item fade-in">
-                        <div class="painting-frame">
-                            <img src="popart-woman.jpg" alt="Девушка">
-                        </div>
-                        <div class="painting-info">
-                            <h3>Девушка</h3>
-                            <p>Холст 21×30, масло, 2026 г.<br>В частной коллекции</p>
-                        </div>
-                    </div>
-                    <div class="popart-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('popart-giraffe.jpg')">
                             <img src="popart-giraffe.jpg" alt="Жираф">
                         </div>
                         <div class="painting-info">
-                            <h3>Жираф</h3>
-                            <p>Холст 21×30, акрил, 2026 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Жираф</h3>
+                                <p>Холст 21×30, акрил, 2026 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="popart-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('popart-blackcat.jpg')">
                             <img src="popart-blackcat.jpg" alt="Кошка">
                         </div>
                         <div class="painting-info">
-                            <h3>Кошка</h3>
-                            <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Кошка</h3>
+                                <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="popart-item fade-in">
-                        <div class="painting-frame">
-                            <img src="popart-elephant-colorful.jpg" alt="Слон">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('popart-elephant.jpg')">
+                            <img src="popart-elephant.jpg" alt="Слон">
                         </div>
                         <div class="painting-info">
-                            <h3>Слон</h3>
-                            <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Слон</h3>
+                                <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
                 </div>
@@ -986,41 +1158,53 @@
         <!-- Пейзаж -->
         <div id="landscape" class="gallery-section">
             <div class="gallery-subsection">
-                <div class="landscape-grid">
-                    <div class="landscape-item fade-in">
-                        <div class="painting-frame">
+                <div class="gallery-grid">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('lighthouse.jpg')">
                             <img src="lighthouse.jpg" alt="Маяк">
                         </div>
                         <div class="painting-info">
-                            <h3>Маяк</h3>
-                            <p>Холст 15×21, акрил, 2025 г.<br>Выставочный зал КнААЗ</p>
+                            <div class="painting-info-text">
+                                <h3>Маяк</h3>
+                                <p>Холст 15×21, акрил, 2025 г.<br>Выставочный зал КнААЗ</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="landscape-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('lavender.jpg')">
                             <img src="lavender.jpg" alt="Лаванда">
                         </div>
                         <div class="painting-info">
-                            <h3>Лаванда</h3>
-                            <p>Холст 21×30, акрил, 2026 г.<br>Выставочный зал КнААЗ</p>
+                            <div class="painting-info-text">
+                                <h3>Лаванда</h3>
+                                <p>Холст 21×30, акрил, 2026 г.<br>Выставочный зал КнААЗ</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="landscape-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('birch-grove.jpg')">
                             <img src="birch-grove.jpg" alt="Родные просторы">
                         </div>
                         <div class="painting-info">
-                            <h3>Родные просторы</h3>
-                            <p>Холст 21×30, масло, 2026 г.</p>
+                            <div class="painting-info-text">
+                                <h3>Родные просторы</h3>
+                                <p>Холст 21×30, масло, 2026 г.</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="landscape-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('dog-on-bench.jpg')">
                             <img src="dog-on-bench.jpg" alt="Деревенский пейзаж">
                         </div>
                         <div class="painting-info">
-                            <h3>Деревенский пейзаж</h3>
-                            <p>Холст 30×42, масло, 2026 г.</p>
+                            <div class="painting-info-text">
+                                <h3>Деревенский пейзаж</h3>
+                                <p>Холст 30×42, масло, 2026 г.</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
                 </div>
@@ -1030,41 +1214,53 @@
         <!-- Русский стиль -->
         <div id="russian" class="gallery-section">
             <div class="gallery-subsection">
-                <div class="russian-grid">
-                    <div class="russian-item fade-in">
-                        <div class="painting-frame">
+                <div class="gallery-grid">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('folk-matryoshka.jpg')">
                             <img src="folk-matryoshka.jpg" alt="Матрёшка">
                         </div>
                         <div class="painting-info">
-                            <h3>Матрёшка</h3>
-                            <p>Холст 21×30, акрил, 2026 г.</p>
+                            <div class="painting-info-text">
+                                <h3>Матрёшка</h3>
+                                <p>Холст 21×30, акрил, 2026 г.</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="russian-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('folk-goose.jpg')">
                             <img src="folk-goose.jpg" alt="Лебедь в стиле гжель">
                         </div>
                         <div class="painting-info">
-                            <h3>Лебедь в стиле гжель</h3>
-                            <p>Холст 30×42, акрил, 2026 г.</p>
+                            <div class="painting-info-text">
+                                <h3>Лебедь в стиле гжель</h3>
+                                <p>Холст 30×42, акрил, 2026 г.</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="russian-item fade-in">
-                        <div class="painting-frame">
-                            <img src="apples-red.jpg" alt="Хохлома">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('folk-apples.jpg')">
+                            <img src="folk-apples.jpg" alt="Хохлома">
                         </div>
                         <div class="painting-info">
-                            <h3>Хохлома</h3>
-                            <p>Холст 30×42, акрил, 2026 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Хохлома</h3>
+                                <p>Холст 30×42, акрил, 2026 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="russian-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('folk-daisies.jpg')">
                             <img src="folk-daisies.jpg" alt="Ромашки у окна">
                         </div>
                         <div class="painting-info">
-                            <h3>Ромашки у окна</h3>
-                            <p>Холст 30×42, акрил, 2026 г.</p>
+                            <div class="painting-info-text">
+                                <h3>Ромашки у окна</h3>
+                                <p>Холст 30×42, акрил, 2026 г.</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
                 </div>
@@ -1074,59 +1270,77 @@
         <!-- Цветы -->
         <div id="flowers" class="gallery-section">
             <div class="gallery-subsection">
-                <div class="flowers-grid">
-                    <div class="flowers-item fade-in">
-                        <div class="painting-frame">
+                <div class="gallery-grid">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('flowers-hydrangea.jpg')">
                             <img src="flowers-hydrangea.jpg" alt="Гортензия">
                         </div>
                         <div class="painting-info">
-                            <h3>Гортензия</h3>
-                            <p>Холст 30×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Гортензия</h3>
+                                <p>Холст 30×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="flowers-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('flowers-iris.jpg')">
                             <img src="flowers-iris.jpg" alt="Ирис">
                         </div>
                         <div class="painting-info">
-                            <h3>Ирис</h3>
-                            <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Ирис</h3>
+                                <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="flowers-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('flowers-pink.jpg')">
                             <img src="flowers-pink.jpg" alt="Цветы">
                         </div>
                         <div class="painting-info">
-                            <h3>Цветы</h3>
-                            <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Цветы</h3>
+                                <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="flowers-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('flowers-peony.jpg')">
                             <img src="flowers-peony.jpg" alt="Пионы">
                         </div>
                         <div class="painting-info">
-                            <h3>Пионы</h3>
-                            <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Пионы</h3>
+                                <p>Холст 21×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="flowers-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('flowers-rose.jpg')">
                             <img src="flowers-rose.jpg" alt="Роза">
                         </div>
                         <div class="painting-info">
-                            <h3>Роза</h3>
-                            <p>Холст 21×30, акрил, 2025 г.<br>Выставочный зал КнААЗ</p>
+                            <div class="painting-info-text">
+                                <h3>Роза</h3>
+                                <p>Холст 21×30, акрил, 2025 г.<br>Выставочный зал КнААЗ</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="flowers-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('flowers-peony-vase.jpg')">
                             <img src="flowers-peony-vase.jpg" alt="Пионы в вазе">
                         </div>
                         <div class="painting-info">
-                            <h3>Пионы в вазе</h3>
-                            <p>Холст, акрил, 2025 г.</p>
+                            <div class="painting-info-text">
+                                <h3>Пионы в вазе</h3>
+                                <p>Холст, акрил, 2025 г.</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
                 </div>
@@ -1136,41 +1350,41 @@
         <!-- Натюрморт -->
         <div id="still-life" class="gallery-section">
             <div class="gallery-subsection">
-                <div class="still-life-grid">
-                    <div class="still-life-item fade-in">
-                        <div class="painting-frame">
+                <div class="gallery-grid">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('cherries.jpg')">
                             <img src="cherries.jpg" alt="Черешня">
                         </div>
                         <div class="painting-info">
-                            <h3>Черешня</h3>
-                            <p>Холст 15×21, акварель, 2026 г.<br>Выставочный зал КнААЗ</p>
+                            <div class="painting-info-text">
+                                <h3>Черешня</h3>
+                                <p>Холст 15×21, акварель, 2026 г.<br>Выставочный зал КнААЗ</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="still-life-item fade-in">
-                        <div class="painting-frame">
-                            <img src="still-life.jpg" alt="Натюрморт с виноградом">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('grapes-orange.jpg')">
+                            <img src="grapes-orange.jpg" alt="Натюрморт с виноградом">
                         </div>
                         <div class="painting-info">
-                            <h3>Натюрморт с виноградом</h3>
-                            <p>Холст 21×30, масло, 2026 г.</p>
+                            <div class="painting-info-text">
+                                <h3>Натюрморт с виноградом</h3>
+                                <p>Холст 21×30, масло, 2026 г.</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="still-life-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('gooseberries.jpg')">
                             <img src="gooseberries.jpg" alt="Крыжовник">
                         </div>
                         <div class="painting-info">
-                            <h3>Крыжовник</h3>
-                            <p>Холст 30×42, масло, 2026 г.<br>В частной коллекции</p>
-                        </div>
-                    </div>
-                    <div class="still-life-item fade-in">
-                        <div class="painting-frame">
-                            <img src="apples-red.jpg" alt="Жостовская роспись. Яблоки">
-                        </div>
-                        <div class="painting-info">
-                            <h3>Жостовская роспись. Яблоки</h3>
-                            <p>Холст 30×42, акрил, 2026 г.</p>
+                            <div class="painting-info-text">
+                                <h3>Крыжовник</h3>
+                                <p>Холст 30×42, масло, 2026 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
                 </div>
@@ -1180,94 +1394,121 @@
         <!-- Графика -->
         <div id="graphics" class="gallery-section">
             <div class="gallery-subsection">
-                <div class="graphics-grid">
-                    <div class="graphics-item fade-in">
-                        <div class="painting-frame">
+                <div class="gallery-grid">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('horse-head.jpg')">
                             <img src="horse-head.jpg" alt="В упряжке">
                         </div>
                         <div class="painting-info">
-                            <h3>В упряжке</h3>
-                            <p>Холст 21×30, 2024 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>В упряжке</h3>
+                                <p>Холст 21×30, 2024 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="graphics-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('horse-running.jpg')">
                             <img src="horse-running.jpg" alt="Рысцой">
                         </div>
                         <div class="painting-info">
-                            <h3>Рысцой</h3>
-                            <p>Холст 21×30, 2024 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Рысцой</h3>
+                                <p>Холст 21×30, 2024 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="graphics-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('woman-portrait.jpg')">
                             <img src="woman-portrait.jpg" alt="Голубой сапфир">
                         </div>
                         <div class="painting-info">
-                            <h3>Голубой сапфир</h3>
-                            <p>Холст 21×30, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Голубой сапфир</h3>
+                                <p>Холст 21×30, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="graphics-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('portrait-dreadlocks.jpg')">
                             <img src="portrait-dreadlocks.jpg" alt="Дреды">
                         </div>
                         <div class="painting-info">
-                            <h3>Дреды</h3>
-                            <p>Холст 21×30, 2023 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Дреды</h3>
+                                <p>Холст 21×30, 2023 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="graphics-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('elderly-portrait.jpg')">
                             <img src="elderly-portrait.jpg" alt="Улыбка">
                         </div>
                         <div class="painting-info">
-                            <h3>Улыбка</h3>
-                            <p>Холст 21×30, 2023 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Улыбка</h3>
+                                <p>Холст 21×30, 2023 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Интерьерные -->
+        <!-- Для интерьера -->
         <div id="interior" class="gallery-section">
             <div class="gallery-subsection">
-                <div class="interior-grid">
-                    <div class="interior-item fade-in">
-                        <div class="painting-frame">
+                <div class="gallery-grid">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('interior-woman.jpg')">
                             <img src="interior-woman.jpg" alt="Девушка">
                         </div>
                         <div class="painting-info">
-                            <h3>Девушка</h3>
-                            <p>Холст 21×30, поталь, акрил, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Девушка</h3>
+                                <p>Холст 21×30, поталь, акрил, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="interior-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('interior-tree.jpg')">
                             <img src="interior-tree.jpg" alt="Золотое дерево">
                         </div>
                         <div class="painting-info">
-                            <h3>Золотое дерево</h3>
-                            <p>Холст 21×30, поталь, акрил, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Золотое дерево</h3>
+                                <p>Холст 21×30, поталь, акрил, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="interior-item fade-in">
-                        <div class="painting-frame">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('interior-horse1.jpg')">
                             <img src="interior-horse1.jpg" alt="Лошадь девочка">
                         </div>
                         <div class="painting-info">
-                            <h3>Лошадь девочка</h3>
-                            <p>Холст 30×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Лошадь девочка</h3>
+                                <p>Холст 30×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
-                    <div class="interior-item fade-in">
-                        <div class="painting-frame">
-                            <img src="interior-horse-profile.jpg" alt="Лошадь в профиль">
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('interior-horse2.jpg')">
+                            <img src="interior-horse2.jpg" alt="Лошадь в профиль">
                         </div>
                         <div class="painting-info">
-                            <h3>Лошадь в профиль</h3>
-                            <p>Холст 30×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            <div class="painting-info-text">
+                                <h3>Лошадь в профиль</h3>
+                                <p>Холст 30×30, акрил, 2025 г.<br>В частной коллекции</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
                 </div>
@@ -1288,6 +1529,7 @@
             <div class="about-text fade-in">
                 <h3>Искусство как путь</h3>
                 <p>Меня зовут Татьяна, и я создаю произведения, которые говорят на языке эмоций и форм. Моя работа — это исследование пространства, цвета и движения, поиск гармонии между хаосом и порядком.</p>
+                <p>Мой путь в живописи начался с бесплатных курсов школы Матита — именно там я впервые взяла в руки кисть и поняла, что искусство станет делом моей жизни. С тех пор я постоянно обучалась различным техникам рисования — от акварели и масла до потали, — и в этом году получила <a href="#" class="diploma-link" onclick="openDiploma(event)">диплом</a> о профессиональной переподготовке с отличием по квалификации «Художник-живописец, преподаватель».</p>
                 <div class="about-quote">Каждая картина — это история, рассказанная через плавные линии и мягкие переходы цвета</div>
                 <p>Вдохновляюсь природой, архитектурой и внутренним миром человека. Мои картины хранятся в частных собраниях по всей стране. Я верю, что искусство способно трансформировать пространство и наполнять его смыслом.</p>
                 <div class="about-signature">Татьяна Бедина</div>
@@ -1298,7 +1540,24 @@
     <section id="order">
         <div class="order-section fade-in">
             <h2>Заказать работу</h2>
-            <p>Хотите приобрести готовую работу или заказать картину по индивидуальным размерам? Я открыта к сотрудничеству и готова обсудить ваши пожелания.</p>
+            <p class="order-intro">Каждая картина начинается с истории. Выберите готовую работу из каталога или закажите полотно, созданное специально для вас и вашего пространства.</p>
+            <div class="order-options">
+                <div class="order-option">
+                    <span class="order-option-num">01</span>
+                    <h3>Готовая картина</h3>
+                    <p>Понравившуюся работу можно выбрать из каталога — она уже написана и ждёт своего владельца.</p>
+                </div>
+                <div class="order-option">
+                    <span class="order-option-num">02</span>
+                    <h3>Картина на заказ</h3>
+                    <p>Нарисую по вашим предпочтениям: сюжет, образы и цветовая гамма — всё обсудим и подберём вместе.</p>
+                </div>
+                <div class="order-option">
+                    <span class="order-option-num">03</span>
+                    <h3>Работа для интерьера</h3>
+                    <p>Подберём размер и цветовое решение под ваше пространство, чтобы картина гармонично вписалась в интерьер.</p>
+                </div>
+            </div>
             <a href="mailto:bedinatv@mail.ru" class="cta-button">Связаться со мной</a>
         </div>
     </section>
@@ -1308,12 +1567,30 @@
             <img src="logo-tb.png" alt="Татьяна Бедина" class="footer-logo-img">
             <div class="footer-contacts">
                 <a href="https://t.me/bedinatv" target="_blank" class="footer-contact-link">Telegram: @bedinatv</a>
-                <span class="footer-contact-separator">·</span>
-                <a href="mailto:bedinatv@mail.ru" class="footer-contact-link">bedinatv@mail.ru</a>
+                <span class="footer-contact-divider">·</span>
+                <a href="mailto:bedinatv@mail.ru" class="footer-contact-link">Email: bedinatv@mail.ru</a>
             </div>
             <div class="copyright">© 2026 Татьяна Бедина · Все права защищены</div>
         </div>
     </footer>
+
+    <!-- Lightbox with zoom & multi-image -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-hint">Колесо мыши — масштаб · двойной клик — приблизить · зажмите и тяните для перемещения</div>
+        <div class="lightbox-counter" id="lightbox-counter">1 / 2</div>
+        <button class="lightbox-close" id="lightbox-close" aria-label="Закрыть">×</button>
+        <button class="lightbox-arrow lightbox-arrow-prev" id="lightbox-prev" aria-label="Предыдущее изображение">‹</button>
+        <button class="lightbox-arrow lightbox-arrow-next" id="lightbox-next" aria-label="Следующее изображение">›</button>
+        <div class="lightbox-stage" id="lightbox-stage">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+        <div class="lightbox-controls">
+            <button id="zoom-out" aria-label="Уменьшить">−</button>
+            <span id="zoom-label">100%</span>
+            <button id="zoom-in" aria-label="Увеличить">+</button>
+            <button id="zoom-reset" aria-label="Сбросить масштаб">⟲</button>
+        </div>
+    </div>
 
     <script>
         const header = document.getElementById('header');
@@ -1361,6 +1638,152 @@
                 });
             });
         });
+
+        /* ===== Lightbox with zoom & gallery ===== */
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxStage = document.getElementById('lightbox-stage');
+        const zoomLabel = document.getElementById('zoom-label');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+
+        let zoomLevel = 1;
+        let panX = 0, panY = 0;
+        let dragging = false;
+        let dragStartX = 0, dragStartY = 0, startPanX = 0, startPanY = 0;
+        let touchStart = null;
+        let lightboxImages = [];
+        let lightboxIndex = 0;
+
+        function applyTransform(smooth) {
+            lightboxImg.style.transition = smooth ? 'transform 0.25s ease' : 'none';
+            lightboxImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+            lightboxImg.style.cursor = zoomLevel > 1 ? 'grab' : 'zoom-in';
+            zoomLabel.textContent = Math.round(zoomLevel * 100) + '%';
+        }
+
+        function resetZoom() {
+            zoomLevel = 1; panX = 0; panY = 0;
+            applyTransform(true);
+        }
+
+        function setZoom(z) {
+            zoomLevel = Math.min(5, Math.max(1, z));
+            if (zoomLevel === 1) { panX = 0; panY = 0; }
+            applyTransform(true);
+        }
+
+        function showLightboxImage() {
+            lightboxImg.src = lightboxImages[lightboxIndex];
+            if (lightboxImages.length > 1) {
+                lightboxCounter.textContent = (lightboxIndex + 1) + ' / ' + lightboxImages.length;
+            }
+            resetZoom();
+        }
+
+        function openLightbox(src) {
+            if (Array.isArray(src)) {
+                lightboxImages = src;
+                lightbox.classList.add('has-nav');
+            } else {
+                lightboxImages = [src];
+                lightbox.classList.remove('has-nav');
+            }
+            lightboxIndex = 0;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            showLightboxImage();
+        }
+
+        function openDiploma(e) {
+            e.preventDefault();
+            openLightbox(['diploma-open.jpg', 'diploma-cover.jpg']);
+        }
+
+        function lightboxPrev() {
+            if (lightboxImages.length < 2) return;
+            lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+            showLightboxImage();
+        }
+
+        function lightboxNext() {
+            if (lightboxImages.length < 2) return;
+            lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
+            showLightboxImage();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lightbox.classList.remove('has-nav');
+            document.body.style.overflow = 'auto';
+            lightboxImg.src = '';
+            resetZoom();
+        }
+
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        document.getElementById('zoom-in').addEventListener('click', () => setZoom(zoomLevel + 0.5));
+        document.getElementById('zoom-out').addEventListener('click', () => setZoom(zoomLevel - 0.5));
+        document.getElementById('zoom-reset').addEventListener('click', resetZoom);
+        document.getElementById('lightbox-prev').addEventListener('click', lightboxPrev);
+        document.getElementById('lightbox-next').addEventListener('click', lightboxNext);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target === lightboxStage) closeLightbox();
+        });
+
+        lightbox.addEventListener('wheel', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            e.preventDefault();
+            setZoom(zoomLevel + (e.deltaY < 0 ? 0.25 : -0.25));
+        }, { passive: false });
+
+        lightboxImg.addEventListener('dblclick', () => {
+            if (zoomLevel > 1) resetZoom(); else setZoom(2.5);
+        });
+
+        lightboxImg.addEventListener('mousedown', (e) => {
+            if (zoomLevel <= 1) return;
+            e.preventDefault();
+            dragging = true;
+            lightboxImg.style.cursor = 'grabbing';
+            dragStartX = e.clientX; dragStartY = e.clientY;
+            startPanX = panX; startPanY = panY;
+        });
+        window.addEventListener('mousemove', (e) => {
+            if (!dragging) return;
+            panX = startPanX + (e.clientX - dragStartX);
+            panY = startPanY + (e.clientY - dragStartY);
+            applyTransform(false);
+        });
+        window.addEventListener('mouseup', () => {
+            if (!dragging) return;
+            dragging = false;
+            lightboxImg.style.cursor = zoomLevel > 1 ? 'grab' : 'zoom-in';
+        });
+
+        lightboxImg.addEventListener('touchstart', (e) => {
+            if (zoomLevel <= 1 || e.touches.length !== 1) return;
+            touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY, px: panX, py: panY };
+        });
+        lightboxImg.addEventListener('touchmove', (e) => {
+            if (!touchStart) return;
+            e.preventDefault();
+            panX = touchStart.px + (e.touches[0].clientX - touchStart.x);
+            panY = touchStart.py + (e.touches[0].clientY - touchStart.y);
+            applyTransform(false);
+        }, { passive: false });
+        lightboxImg.addEventListener('touchend', () => { touchStart = null; });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lightboxPrev();
+            if (e.key === 'ArrowRight') lightboxNext();
+        });
+
+        function scrollToOrder() {
+            const orderSection = document.getElementById('order');
+            orderSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     </script>
 </body>
 </html>
