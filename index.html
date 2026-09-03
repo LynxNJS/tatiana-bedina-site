@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#f0e6d3">
     <title>Татьяна Бедина — Художник</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +13,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
+            color-scheme: light;
             --washi: #f0e6d3;
             --washi-dark: #e8dcc8;
             --ink: #1a1a1a;
@@ -23,7 +26,10 @@
             --font-body: 'Cormorant Garamond', serif;
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+            background: #f0e6d3;
+        }
 
         body {
             font-family: var(--font-body);
@@ -578,7 +584,6 @@
         }
         .lightbox-close:hover { background: var(--washi); color: var(--ink); }
 
-        /* Стрелки листания (видны только для диплома) */
         .lightbox-arrow {
             position: absolute;
             top: 50%;
@@ -696,6 +701,8 @@
             align-items: center;
         }
 
+        .about-media { position: relative; }
+
         .about-image-wrap { position: relative; }
         .about-image-wrap::before {
             content: '';
@@ -721,6 +728,45 @@
         }
         .about-image:hover img { filter: sepia(0%) contrast(1); }
 
+        /* ===== Живая карточка с видео (широкая, не перекрывает лицо) ===== */
+        .about-video-card {
+            position: absolute;
+            right: -30px;
+            bottom: -45px;
+            width: 60%;
+            max-width: 340px;
+            background: var(--washi);
+            border: 1px solid var(--hanko);
+            padding: 8px 8px 0;
+            box-shadow: 0 20px 50px rgba(26, 26, 26, 0.28);
+            transform: rotate(3deg);
+            z-index: 2;
+            transition: transform 0.4s ease;
+        }
+
+        .about-video-card:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+
+        .about-video-card video {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            background: #fff;
+        }
+
+        .about-video-label {
+            display: block;
+            padding: 0.6rem 0.3rem 0.7rem;
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            color: var(--ink-light);
+            text-align: center;
+        }
+
         .about-text h3 {
             font-family: var(--font-body);
             font-size: 2.2rem;
@@ -740,7 +786,6 @@
             text-align: left;
         }
 
-        /* Ссылка на диплом */
         .diploma-link {
             color: var(--hanko);
             text-decoration: none;
@@ -1000,6 +1045,15 @@
             .order-options { grid-template-columns: 1fr; gap: 1.5rem; }
             .about-content { grid-template-columns: 1fr; gap: 3rem; }
             .about-image img { height: 500px; }
+            .about-video-card {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                margin: -80px auto 0;
+                width: 82%;
+                max-width: 330px;
+                transform: rotate(0);
+            }
             .section-title { font-size: 1.7rem; }
             .section-title::after { display: none; }
             .footer-logo-img { height: 70px; }
@@ -1111,6 +1165,18 @@
                             <div class="painting-info-text">
                                 <h3>Сальвадор Дали</h3>
                                 <p>Холст 21×30, акрил, 2026 г.<br>Выставочный зал КнААЗ</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
+                        </div>
+                    </div>
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('popart-woman.jpg')">
+                            <img src="popart-woman.jpg" alt="Девушка">
+                        </div>
+                        <div class="painting-info">
+                            <div class="painting-info-text">
+                                <h3>Девушка</h3>
+                                <p>Холст 21×30, масло, 2026 г.<br>В частной коллекции</p>
                             </div>
                             <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
@@ -1387,6 +1453,18 @@
                             <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
                         </div>
                     </div>
+                    <div class="gallery-card fade-in">
+                        <div class="painting-frame" onclick="openLightbox('apples-red.jpg')">
+                            <img src="apples-red.jpg" alt="Жостовская роспись. Яблоки">
+                        </div>
+                        <div class="painting-info">
+                            <div class="painting-info-text">
+                                <h3>Жостовская роспись. Яблоки</h3>
+                                <p>Холст 30×42, акрил, 2026 г.</p>
+                            </div>
+                            <button class="order-btn" onclick="scrollToOrder()">Заказать</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1521,9 +1599,15 @@
             <h2 class="section-title">Обо мне</h2>
         </div>
         <div class="about-content">
-            <div class="about-image-wrap fade-in">
-                <div class="about-image">
-                    <img src="tatiana-photo.jpg" alt="Татьяна Бедина">
+            <div class="about-media fade-in">
+                <div class="about-image-wrap">
+                    <div class="about-image">
+                        <img src="tatiana-photo.jpg" alt="Татьяна Бедина">
+                    </div>
+                </div>
+                <div class="about-video-card">
+                    <video src="process.mp4" autoplay muted loop playsinline></video>
+                    <span class="about-video-label">Рождение портрета · процесс</span>
                 </div>
             </div>
             <div class="about-text fade-in">
